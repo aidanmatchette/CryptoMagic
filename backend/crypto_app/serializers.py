@@ -15,6 +15,7 @@ class CryptoCoinSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'name_id', 'quantity', 'coinst']
 
 class AppUserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
     class Meta:
         model = AppUser
         fields = ['id','name','email', "password"]

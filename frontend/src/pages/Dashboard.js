@@ -3,6 +3,7 @@ import axios from 'axios'
 import Search from '../components/Search/Search'
 import Coin from '../components/Coin/Coin'
 import getDashboard from '../api/dashboardAPI.js'
+import Carousell from '../components/Carousell/Carousell'
 
 // main dashboard url, eventualy change to be able to switch market.
 // https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false
@@ -37,6 +38,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className='dashboard-search'>
+        <Carousell />
         <Search setSearch={setSearch} />
       </div>
       {filteredCoins}
