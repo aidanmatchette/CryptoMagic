@@ -49,7 +49,7 @@ const Dashboard = () => {
 
 
   return (
-    <div>
+    <div className='dashboard-main'>
       <div className='carousell'>
         <Carousell trendingCoins={trendingCoins} setTrendingCoins={setTrendingCoins} />
 
@@ -57,7 +57,9 @@ const Dashboard = () => {
       <div className='dashboard-search'>
         <Search setSearch={setSearch} />
       </div>
-      {filteredCoins}
+      <div className='coin-banners'>
+        {filteredCoins}
+      </div>
     </div>
   )
 }

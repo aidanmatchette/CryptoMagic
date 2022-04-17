@@ -13,7 +13,7 @@ const Navbar = () => {
     <AppBar color='transparent' position='static'>
         <Container >
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <Typography onClick={() => navigate('/')} sx={{fontWeight: 'bold', fontSize:20, cursor: 'pointer'}}>Crypto Magic</Typography>
+                <Typography onClick={() => navigate('/')} sx={{fontWeight: 'bold', fontSize:30, cursor: 'pointer'}}>CryptoMagic</Typography>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="select-standard-label">Currency</InputLabel>
                     <Select

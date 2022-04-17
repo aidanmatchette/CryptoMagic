@@ -10,7 +10,7 @@ const mediaLimit = {
         items: 2,
     },
     1024: {
-        items: 4,
+        items: 3,
     }
 }
 
@@ -18,7 +18,9 @@ const Carousell = ({trendingCoins}) => {
     const {symbol} = CryptoState();
     const styles = {
         imageContainer: {
+            // backgroundImage: 'url(https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80)',
             height:500,
+            width: 2000,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around'
@@ -29,12 +31,14 @@ const Carousell = ({trendingCoins}) => {
         console.log(percentChange)
         return(
             <Link className='link' to={`/coin/${coin.id}`}>
-                <img src={coin.image} height='70px' />
+                <img src={coin.image} height='100px' />
                 <span className='alice-symbol'>{coin.symbol}
                     &nbsp;
-                   {percentChange > 0 ? <span className='percent positive'>{percentChange}</span> : <span className='percent negative'>{percentChange}</span>} 
+                {percentChange > 0 
+                    ? <span className='percent positive'>{percentChange}%</span> 
+                    : <span className='percent negative'>{percentChange}%</span>} 
                 </span> 
-                <span className='price'>{symbol}{coin.current_price}</span>
+                <h3 className='price'>{symbol}{coin.current_price}</h3>
             </Link>
         )
     })

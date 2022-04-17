@@ -1,0 +1,9 @@
+.coin-banners {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+}
+.dashboard-main {
+    background-color:  rgb(255, 255, 255);
+}
