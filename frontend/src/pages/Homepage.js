@@ -29,7 +29,7 @@ const Homepage = () => {
                             Create an account</Button>
                         </div>
                         <div className='header-content'>
-                            <img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" width="600" height="500"/>
+                            <img className='image' src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" width="600" height="500"/>
                         </div>
                     </div>
                 </div>
@@ -40,12 +40,12 @@ const Homepage = () => {
                 <div className='dashboard-flex'>
                     <div className='dashboard-content'>
                         <div className='dashboard-image'>
-                            <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" width="600" height="500"/>
+                            <img className='image' src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" width="600" height="500"/>
                         </div> 
                         <div className='dashboard-text'>
                             <h2 className='dashboard'>Dashboard</h2>
                             <h4 className='dashboard-description'>See what the current trends of your favorite Crypto coins are doing!</h4>
-                            <Button size='large' variant="contained" href="#/dashboard" 
+                            <Button size='large' variant="contained" href="#/dashboard"
                             sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'} }} disableElevation>
                             Dashboard</Button>
                         </div>

@@ -63,7 +63,7 @@ h2 {
 .header-text {
     width: 100%;
 }
-img {
+.image {
     border-radius: 10px;
 
     -moz-box-shadow: 0 0 5px rgb(0, 0, 0);
