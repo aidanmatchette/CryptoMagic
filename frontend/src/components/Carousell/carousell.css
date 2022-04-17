@@ -1,0 +1,44 @@
+.top {
+    background-image: url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80');
+}
+
+.carousell-text {
+    display: flex;
+    color: rgb(255, 255, 255);
+    height: 300px;
+    justify-content: space-around;
+    padding-top: 40px;
+
+}
+.text-heading {
+    display: inline-block;
+}
+.carousell-header {
+    text-align: left;
+    font-size: 45pt;
+}
+.subheaer {
+    display: flex;
+}
+.alice {
+    height: 60%;
+    text-decoration: none;
+}
+.alice-symbol {
+    text-transform: uppercase;
+    color: white;
+    margin-top: 8px;
+
+}
+.link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.price {
+    text-decoration: none;
+    color: white;
+    margin-top: 8px;
+}

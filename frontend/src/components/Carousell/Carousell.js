@@ -1,23 +1,62 @@
-import { autocompleteClasses, Container } from '@mui/material'
-import { border, height } from '@mui/system'
+import { Container, Typography } from '@mui/material'
 import React from 'react'
+import './carousell.css'
+import AliceCarousel from 'react-alice-carousel'
+import { Link } from 'react-router-dom'
+import { CryptoState } from '../../Context'
 
-const spaceImg = 'https://images.unsplash.com/photo-1468657988500-aca2be09f4c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+const mediaLimit = {
+    0: {
+        items: 2,
+    },
+    1024: {
+        items: 4,
+    }
+}
 
-const Carousell = () => {
+const Carousell = ({trendingCoins}) => {
+    const {symbol} = CryptoState();
     const styles = {
         imageContainer: {
-            backgroundImage: `url(${spaceImg})`,
             height:500,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around'
         }
     }
+    const trendingItems = trendingCoins.map(coin => {
+        let percentChange = coin.market_cap_change_percentage_24h.toFixed(2)
+        console.log(percentChange)
+        return(
+            <Link className='link' to={`/coin/${coin.id}`}>
+                <img src={coin.image} height='70px' />
+                <span className='alice-symbol'>{coin.symbol}
+                    &nbsp;
+                   {percentChange > 0 ? <span className='percent positive'>{percentChange}</span> : <span className='percent negative'>{percentChange}</span>} 
+                </span> 
+                <span className='price'>{symbol}{coin.current_price}</span>
+            </Link>
+        )
+    })
   return (
-    <div>
+    <div className='top'>
         <Container style={styles.imageContainer}>
-            <div className='crypto'>
+            <div className='carousell-text'>
+                <div className='text-heading'>
+                    <h1 className='carousell-header'>CryptoMagic</h1>
+                    <h4 className='subheader'>Check out these trending coins!</h4>
+                </div>
+                <div></div>
+            </div>
+            <div className='alice'>
+                <AliceCarousel mouseTracking infinite 
+                    autoPlayInterval={1000}
+                    animationDuration={1100} 
+                    disableDotsControls 
+                    disableButtonsControls
+                    responsive={mediaLimit} 
+                    items={trendingItems}
+                    autoPlay/>
 
             </div>
         </Container>

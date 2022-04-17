@@ -22,7 +22,7 @@ const Homepage = () => {
                     </div>
                     <div className='header-content'>
                         <div className='header-text'>
-                            <h1>Create your Crytpo portfolio</h1>
+                            <h1 className='create'>Create your Crytpo portfolio</h1>
                             <h5 className='description'>Start tracking all of your crypto assests securly in a matter of minutes!</h5>
                             <Button size='large' variant="contained" href="#/signup" 
                             sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'} }} disableElevation>
