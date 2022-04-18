@@ -27,10 +27,11 @@
 }
 .coin-info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 40px;
     width: 600px;
 }
 .coin-image {
