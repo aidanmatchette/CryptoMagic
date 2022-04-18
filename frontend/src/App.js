@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />}/>   
           <Route path='/dashboard' element={<Dashboard />}/>   
-          <Route path='/coin/:id' element={<CoinDetail />}/>   
+          <Route path='/coin/:coinId' element={<CoinDetail />}/>   
           <Route path='/signup' element={<SignupPage />}/>   
           <Route path='/login' element={<LoginPage />}/>   
         </Routes> 

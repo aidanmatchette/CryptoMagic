@@ -19,7 +19,7 @@ const Carousell = ({trendingCoins}) => {
     const styles = {
         imageContainer: {
             // backgroundImage: 'url(https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80)',
-            height:500,
+            height:450,
             width: 2000,
             display: 'flex',
             flexDirection: 'column',
@@ -28,7 +28,6 @@ const Carousell = ({trendingCoins}) => {
     }
     const trendingItems = trendingCoins.map(coin => {
         let percentChange = coin.market_cap_change_percentage_24h.toFixed(2)
-        console.log(percentChange)
         return(
             <Link className='link' to={`/coin/${coin.id}`}>
                 <img src={coin.image} height='100px' />
@@ -44,6 +43,7 @@ const Carousell = ({trendingCoins}) => {
     })
   return (
     <div className='top'>
+        <div className='picture'></div>
         <Container style={styles.imageContainer}>
             <div className='carousell-text'>
                 <div className='text-heading'>
