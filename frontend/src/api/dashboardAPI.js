@@ -35,8 +35,19 @@ const getCoin = async (coinId) => {
         alert('There was an error during the request')
     }
 }
+const getGraphData = async (coinId, days, currency) => {
+    try {
+        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`)
+
+        return response.data.prices
+    } catch (error) {
+        console.log(error)
+        alert('There was an error during your request.')
+    }
+}
 export default {
     getDashboard,
     getTrendingDashboard,
-    getCoin
+    getCoin,
+    getGraphData
 }

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { CryptoState } from '../Context';
 import dashboardAPI from '../api/dashboardAPI';
 import CoinInfo from '../components/CoinInfo/CoinInfo';
+import CoinChart from '../components/CoinChart/CoinChart';
+import LoadingDashboard from '../components/LoadingDashboard';
 
 const CoinDetail = () => {
   const [coin, setCoin] = useState([])
@@ -22,6 +24,7 @@ const CoinDetail = () => {
   return (
     <div>
       <CoinInfo coin={coin} />
+      {coin.id ? <CoinChart coin={coin} /> : <LoadingDashboard /> }
     </div>
   )
 }
