@@ -11,7 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 //react components
 import {useEffect, useState} from 'react'
 import {HashRouter as BrowserRouter, Routes, Route } from 'react-router-dom'
-console.log('test')
+
 function App() {
   const [currency, setCurrency] = useState('usd')
 
