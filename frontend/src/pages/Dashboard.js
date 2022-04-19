@@ -7,6 +7,7 @@ import dashboardAPI from '../api/dashboardAPI.js'
 import Carousell from '../components/Carousell/Carousell'
 import { CryptoState } from '../Context'
 import { Pagination } from '@mui/material'
+import LoadingDashboard from '../components/LoadingDashboard'
 
 // main dashboard url, eventualy change to be able to switch market.
 // https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false
@@ -64,7 +65,7 @@ const Dashboard = () => {
 
       </div>
       <div className='dashboard-search'>
-        <Search setSearch={setSearch} />
+        <Search setSearch={setSearch} variant='primary' />
       </div>
       <div className='coin-banners'>
         {filteredCoins}

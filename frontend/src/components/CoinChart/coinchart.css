@@ -1,16 +1,33 @@
 .chart-buttons {
-    margin-top: 10px;
+    padding-top: 40px;
     display: flex;
     justify-content: space-around;
     width: auto;
+    padding-right: 55px;
+    padding-left: 55px;
 
 }
-Button {
+.num-buttons {
     width: 300px;
 }
-
-.coin-graph {
+.graph-container {
     display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+    justify-content: center;
+    align-content: center;
+}
+.coin-graph {
+    height: auto;
+    max-width: 1500px;
+    background-color: rgb(33, 33, 66);
+    border-radius: 10px;
+    -moz-box-shadow: 0 0 5px rgb(0, 0, 0);
+    -webkit-box-shadow: 0 0 5px rgb(0, 0, 0);
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+
+}
+.coin-chart-container {
+    background-color: rgb(43, 43, 43);
+    background-color: rgb(43, 43, 43);
+    /* padding-top: 10px; */
+    height: 100vh;
 }

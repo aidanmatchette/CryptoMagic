@@ -13,7 +13,7 @@ const CoinInfo = ({coin}) => {
     const forum_link = coin.links?.official_forum_url[0] 
     const reddit_link = coin.links?.subreddit_url 
 
-    const hrChange = coin.market_data?.market_cap_change_percentage_24h
+    const hrChange = coin.market_data?.market_cap_change_percentage_24h.toFixed(2)
 
 
 
