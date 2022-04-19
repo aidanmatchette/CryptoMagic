@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const navigate = useNavigate()   
 
-    const {currency,setCurrency} = CryptoState();
+    const {currency,setCurrency, isAuthenticated} = CryptoState();
 
   return (
     <AppBar color='transparent' position='static'>
@@ -18,9 +18,13 @@ const Navbar = () => {
                         <Button onClick={() => navigate('/dashboard')} size='large' 
                         sx={{color: 'black'}}>
                         Dashboard</Button>
+                    { isAuthenticated && 
+                          <Button onClick={() => navigate('/portfolio')} size='large' 
+                          sx={{color: 'black'}}>
+                          My Portfolios</Button>
+                      }
                     </Box> 
 
-                
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="select-standard-label">Currency</InputLabel>
                     <Select

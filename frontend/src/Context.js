@@ -5,6 +5,7 @@ const CryptoMagic = createContext()
 const Context = ({children}) => {
     const [currency, setCurrency] = useState('usd')
     const [symbol, setSymbol] = useState('$')
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
 
     useEffect(() => {
         if (currency === 'jpy') setSymbol('¥');
@@ -14,8 +15,7 @@ const Context = ({children}) => {
 
     },[currency])
   return (
-      <CryptoMagic.Provider value={{currency,symbol,setCurrency}}>
-
+      <CryptoMagic.Provider value={{currency,symbol,setCurrency, isAuthenticated, setIsAuthenticated}}>
           {children}
       </CryptoMagic.Provider>
   )
