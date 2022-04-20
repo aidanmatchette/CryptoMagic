@@ -1,27 +1,55 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import api_view
+from django.contrib.auth import authenticate, login, logout
+from .models import AppUser
 from .serializers import *
 from .views_helper import *
 
-# from dj_rest_auth.registration.views import SocialLoginView
-# from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-# from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-# class GoogleAuth(SocialLoginView):
-#     adapter_class = GoogleOAuth2Adapter
-#     client_class = OAuth2Client
 
 def homepage(request):
     Index = open("build/index.html").read()
     return HttpResponse(Index)
+
+@api_view(['POST'])
 def log_in(request):
+    email = request.data['username']
+    password = request.data['password']
+
+    user = authenticate(username=email, password=password)
+
+    if user is not None:
+        if user.is_active:
+            try:
+                login(request._request, user)
+                return JsonResponse({'user': user, 'message': 'You have successfully logged in'}, status=200)
+            except Exception as e:
+                print('---- login error -----', e)
+                return JsonResponse({'error message':e }, status=299)
+        else:
+            return JsonResponse({'error message': "Your account is no longer active"})
+    else:
+        return JsonResponse({'error message': 'You do not have an account'})
+
+
     pass
+@api_view(['POST'])
 def sign_up(request):
-    pass
+    try:
+        AppUser.objects.create(username=request.data['email'], password=request.data['password'], name=request.data['name'] ,email=request.data['email'])
+        return JsonResponse({'message': 'Your account has successfully been created'}, status=200)
+
+    except Exception as e:
+        print(str(e))
+        return JsonResponse({'error messgage': 'There was an error during your request.'})
+
+@api_view(['POST'])
 def log_out(request):
-    pass
+   logout(request)
+   return JsonResponse({'message': 'You have successfully logged out'})
+
+
 def who_am_i(request):
     pass
 
@@ -29,6 +57,9 @@ def who_am_i(request):
 class PortfolioViewSet(ModelViewSet):
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
+
+    # def get_querey set
+    # def create
 
 class CryptoCoinViewSet(ModelViewSet):
     queryset = CryptoCoin.objects.all()
@@ -39,9 +70,9 @@ class AppUserViewSet(ModelViewSet):
     queryset = AppUser.objects.all()
     serialzer_class = AppUserSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return (permissions.AllowAny(),)
-        return (permissions.IsAdminUser(),)
+    # def get_permissions(self):
+    #     if self.request.method == 'POST':
+    #         return (permissions.AllowAny(),)
+    #     return (permissions.IsAdminUser(),)
 
 

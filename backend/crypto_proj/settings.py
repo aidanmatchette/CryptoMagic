@@ -53,9 +53,8 @@ INSTALLED_APPS = [
 
     
 ]
-SITE_ID = 1
-# 558818874808-plmfr64fl4mbsh7gmdld49rjjejtfr87.apps.googleusercontent.com
-# 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
+# SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +89,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 WSGI_APPLICATION = 'crypto_proj.wsgi.application'

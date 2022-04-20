@@ -10,7 +10,7 @@ class AppUser(AbstractUser):
     )
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
 
 class Portfolio(models.Model):
     portfolio_name = models.CharField(max_length=65)
