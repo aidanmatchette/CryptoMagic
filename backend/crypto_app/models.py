@@ -10,7 +10,7 @@ class AppUser(AbstractUser):
     )
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
 class Portfolio(models.Model):
     portfolio_name = models.CharField(max_length=65)
@@ -19,7 +19,7 @@ class Portfolio(models.Model):
 class CryptoCoin(models.Model):
     name = models.CharField(max_length=255)
     name_id = models.CharField(max_length=255)
-    quantity = models.IntegerField(max_length=10, default=0)
+    quantity = models.IntegerField(default=0)
     coins = models.ManyToManyField(Portfolio, related_name='coins')
 
     def __str__(self):
