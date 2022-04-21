@@ -12,11 +12,16 @@ const getCSRFToken = () => {
     return csrfToken
 }
 
-axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken()
+// axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken()
 
 const logOut = async () => {
     console.log('-------log out --------')
-    const response = await axios.post('/logout')
+    try {
+        const response = await axios.post('/logout/', null, {headers: {'X-CSRFToken': getCSRFToken()}})
+
+    } catch (e) {
+        console.log(e.response.data)
+    }
 }
 
 export {

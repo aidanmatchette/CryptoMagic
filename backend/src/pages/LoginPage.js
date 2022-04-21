@@ -21,7 +21,7 @@ import { Navigate } from 'react-router-dom';
 const LoginPage = () =>{
 
 
-  const {isAuthenticated, setIsAuthenticated} = CryptoState();
+  const {isAuthenticated, setIsAuthenticated, setActiveUser} = CryptoState();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -33,8 +33,12 @@ const LoginPage = () =>{
       console.log(response)
       if(response.data.message) {
         setIsAuthenticated(true)
+        //TODO : set active user upon login and logout.
+        // let user = response.data.user
+        // console.log('----user----', user)
+        // setActiveUser(user)
         window.location.href = '/#/dashboard'
-        window.location.reload()
+        // window.location.reload()
       } else {
         // TODO : make this a MUI alert and an alert for successfull login
         alert("there was an erro try again")

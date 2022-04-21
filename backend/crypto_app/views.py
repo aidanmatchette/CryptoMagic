@@ -6,16 +6,20 @@ from django.contrib.auth import authenticate, login, logout
 from .models import AppUser
 from .serializers import *
 from .views_helper import *
-
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 def homepage(request):
     Index = open("build/index.html").read()
     return HttpResponse(Index)
 
-@api_view(['POST'])
+@csrf_exempt
 def log_in(request):
-    email = request.data['email']
-    password = request.data['password']
+
+    data = json.loads(request.body)
+    
+    email = data['email']
+    password = data['password']
 
     user = authenticate(username=email, password=password)
     print("----------user --------", user)
@@ -23,19 +27,18 @@ def log_in(request):
     if user is not None:
         if user.is_active:
             try:
-                print('--------made it ----------')
-                login(request._request, user)
+                login(request, user)
                 return JsonResponse({'user': user.name, 'message': 'You have successfully logged in'}, status=200)
             except Exception as e:
                 print('---- login error -----', e)
-                return JsonResponse({'error message':e }, status=299)
+                return JsonResponse({'error message': e }, status=299)
         else:
             return JsonResponse({'error message': "Your account is no longer active"}, status=299)
     else:
         return JsonResponse({'error message': 'You do not have an account'}, status=299)
 
 
-@api_view(['POST'])
+@csrf_exempt
 def sign_up(request):
     try:
         AppUser.objects.create_user(username=request.data['email'], password=request.data['password'], name=request.data['name'] ,email=request.data['email'])
@@ -46,9 +49,11 @@ def sign_up(request):
         return JsonResponse({'error messgage': 'There was an error during your request.'}, status=299)
 
 @api_view(['POST'])
+# @csrf_exempt
 def log_out(request):
-   logout(request)
-   return JsonResponse({'message': 'You have successfully logged out'})
+    print('------------logout')
+    logout(request)
+    return JsonResponse({'message': 'You have successfully logged out'})
 
 
 def who_am_i(request):

@@ -19,8 +19,10 @@ class Portfolio(models.Model):
 class CryptoCoin(models.Model):
     name = models.CharField(max_length=255)
     name_id = models.CharField(max_length=255)
-    quantity = models.IntegerField(default=0)
-    coins = models.ManyToManyField(Portfolio, related_name='coins')
+    # coins = models.ManyToManyField(Portfolio, related_name='coins')
+
+# class CryptoHoldings(models.Model):
+#     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

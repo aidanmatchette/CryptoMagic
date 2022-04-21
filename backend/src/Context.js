@@ -6,6 +6,7 @@ const Context = ({children}) => {
     const [currency, setCurrency] = useState('usd')
     const [symbol, setSymbol] = useState('$')
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [activeUser, setActiveUser] = useState(null)
 
     useEffect(() => {
         if (currency === 'jpy') setSymbol('¥');

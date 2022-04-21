@@ -1,53 +1,73 @@
 import axios from "axios";
+import { CryptoState } from "../Context";
+
+// const {setIsAuthenticated} = CryptoState();
+const getCSRFToken = () => {
+    let csrfToken
+    const cookies = document.cookie.split(';')
+    for (let cookie of cookies) {
+        const crumbs = cookie.split('=')
+        if (crumbs[0].trim() === 'csrftoken') {
+            csrfToken = crumbs[1]
+        }
+    }
+    return csrfToken
+}
+
+// axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken()
+
+const logOut = async () => {
+    console.log('-------log out --------')
+    try {
+        const response = await axios.post('/logout/', null, {headers: {'X-CSRFToken': getCSRFToken()}})
+        // setIsAuthenticated(false)
+        // setActiveUser('')
+
+    } catch (e) {
+        console.log(e.response.data)
+    }
+}
+
+
+
+const tryCatchFetch = async (axiosCall) => {
+    try {
+        const response = await axiosCall()
+        return response.data || {message: 'success'}
+    } catch (e) {
+        console.error("---- Error ----", e.response ? e.response : e)
+        return null
+    }
+}
 
 const getDashboard = async (currency) => {
     if (!currency) {
         currency = 'usd';
     }
-    try {
-        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    return await tryCatchFetch(() => axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`))
 
-        return response.data
-    } catch (error) {
-        console.log(error)
-        alert('There was an error during the request.')
-    }
 }
 const getTrendingDashboard = async (currency) => {
     if (!currency) {
         currency = 'usd';
     }
-    try {
-        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`)
-        console.log(response.data)
-        return response.data
-    } catch (error) {
-        console.log(error)
-        alert('There was an error during the request.')
-    }
+    return await tryCatchFetch(() => axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`))
+
 }
 const getCoin = async (coinId) => {
-    try {
-        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-        alert('There was an error during the request')
-    }
+    return await tryCatchFetch(() => axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}`))
+
 }
 const getGraphData = async (coinId, days, currency) => {
-    try {
-        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`)
-
-        return response.data.prices
-    } catch (error) {
-        console.log(error)
-        alert('There was an error during your request.')
-    }
+    const data = await tryCatchFetch(() => axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`))
+    return data.prices
 }
 export default {
     getDashboard,
     getTrendingDashboard,
     getCoin,
-    getGraphData
+    getGraphData,
+    getCSRFToken,
+    logOut,
+
 }
