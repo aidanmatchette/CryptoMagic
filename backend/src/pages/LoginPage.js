@@ -14,17 +14,14 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CryptoState } from '../Context';
 import axios from 'axios';
-
-
-
-
+import { Navigate } from 'react-router-dom';
 
 
 
 const LoginPage = () =>{
 
 
-  const {isAuthenticated} = CryptoState();
+  const {isAuthenticated, setIsAuthenticated} = CryptoState();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -34,6 +31,14 @@ const LoginPage = () =>{
     };
     axios.post('/login', loginForm).then((response) => {
       console.log(response)
+      if(response.data.message) {
+        setIsAuthenticated(true)
+        window.location.href = '/#/dashboard'
+        window.location.reload()
+      } else {
+        // TODO : make this a MUI alert and an alert for successfull login
+        alert("there was an erro try again")
+      }
     })
   };
 
@@ -102,7 +107,7 @@ const LoginPage = () =>{
               </Button>
               <Grid container justifyContent='center'>
                 <Grid item >
-                  <Link href="/signup" variant="body2">
+                  <Link href="#/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

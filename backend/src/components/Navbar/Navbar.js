@@ -2,6 +2,7 @@ import { AppBar, Container, MenuItem, Select, Toolbar, Typography, FormControl, 
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { CryptoState } from '../../Context'
+import { logOut } from '../../utils/utils'
 
 const Navbar = () => {
 
@@ -14,7 +15,7 @@ const Navbar = () => {
         <Container >
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Typography onClick={() => navigate('/')} sx={{fontWeight: 'bold', fontSize:30, cursor: 'pointer'}}>CryptoMagic</Typography>
-                    <Box sx={{ flexGrow: 1, display: 'flex', marginLeft: 5 }}>
+                    <Box sx={{ justifyContent: 'flex-end', display: 'flex', marginLeft: 5 }}>
                         <Button onClick={() => navigate('/dashboard')} size='large' 
                         sx={{color: 'black'}}>
                         Dashboard</Button>
@@ -22,6 +23,13 @@ const Navbar = () => {
                           <Button onClick={() => navigate('/portfolio')} size='large' 
                           sx={{color: 'black'}}>
                           My Portfolios</Button>
+                      }
+                    </Box> 
+                    <Box sx={{ flexGrow: 1, display: 'flex', marginLeft: 5 }}>
+                    { isAuthenticated && 
+                          <Button onClick={() => logOut()} size='large' 
+                          sx={{color: 'black'}}>
+                          Log Out</Button>
                       }
                     </Box> 
 

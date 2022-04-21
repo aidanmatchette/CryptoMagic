@@ -14,35 +14,36 @@ def homepage(request):
 
 @api_view(['POST'])
 def log_in(request):
-    email = request.data['username']
+    email = request.data['email']
     password = request.data['password']
 
     user = authenticate(username=email, password=password)
+    print("----------user --------", user)
 
     if user is not None:
         if user.is_active:
             try:
+                print('--------made it ----------')
                 login(request._request, user)
-                return JsonResponse({'user': user, 'message': 'You have successfully logged in'}, status=200)
+                return JsonResponse({'user': user.name, 'message': 'You have successfully logged in'}, status=200)
             except Exception as e:
                 print('---- login error -----', e)
                 return JsonResponse({'error message':e }, status=299)
         else:
-            return JsonResponse({'error message': "Your account is no longer active"})
+            return JsonResponse({'error message': "Your account is no longer active"}, status=299)
     else:
-        return JsonResponse({'error message': 'You do not have an account'})
+        return JsonResponse({'error message': 'You do not have an account'}, status=299)
 
 
-    pass
 @api_view(['POST'])
 def sign_up(request):
     try:
-        AppUser.objects.create(username=request.data['email'], password=request.data['password'], name=request.data['name'] ,email=request.data['email'])
+        AppUser.objects.create_user(username=request.data['email'], password=request.data['password'], name=request.data['name'] ,email=request.data['email'])
         return JsonResponse({'message': 'Your account has successfully been created'}, status=200)
 
     except Exception as e:
         print(str(e))
-        return JsonResponse({'error messgage': 'There was an error during your request.'})
+        return JsonResponse({'error messgage': 'There was an error during your request.'}, status=299)
 
 @api_view(['POST'])
 def log_out(request):
@@ -66,9 +67,9 @@ class CryptoCoinViewSet(ModelViewSet):
     serializer_class = CryptoCoinSerializer
 
 
-class AppUserViewSet(ModelViewSet):
-    queryset = AppUser.objects.all()
-    serialzer_class = AppUserSerializer
+# class AppUserViewSet(ModelViewSet):
+#     queryset = AppUser.objects.all()
+#     serialzer_class = AppUserSerializer
 
     # def get_permissions(self):
     #     if self.request.method == 'POST':
