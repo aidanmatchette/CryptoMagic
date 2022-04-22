@@ -1,24 +1,30 @@
 import { Button, Grid, TextField } from '@mui/material'
 import cryptoMagicAPI from '../../api/cryptoAPI'
-
+import getPortfoliosByUser from '../../Context.js'
 import React from 'react'
+import { CryptoState } from '../../Context'
 
 const NewPortfolio = ({setAddPortfolio}) => {
+    const {setUserPortfolios} = CryptoState();
 
+    const getPortfoliosByUser = async () => {
+        const portfolios = await cryptoMagicAPI.listPortfoliosByUser()
+        setUserPortfolios(portfolios)
+    }
 
     const handleNewPortfolio = async (event) => {
         event.preventDefault()
         console.log('event -----', event.target.elements)
         const newPortfolioForm = {
             portfolio_name: event.target.elements['name'].value,
+            owner: localStorage.getItem('user_id'), 
             holdings: []
         }
         console.log('this is a test')
         const data = await cryptoMagicAPI.createPortfolio(newPortfolioForm)
         if(data) {
-            console.log('------data-----', data)
-            console.log('success')
-            console.log('yes');
+            setAddPortfolio(false)
+            getPortfoliosByUser()
         }
     }
 

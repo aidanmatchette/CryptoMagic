@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CryptoState } from '../../Context'
 import './coininfo.css'
 import parse from 'html-react-parser'
 import RedditIcon from '@mui/icons-material/Reddit';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import AddCoin from '../AddCoin/AddCoin';
+import { Tooltip } from '@mui/material';
 
 const CoinInfo = ({coin}) => {
-    const {symbol, currency} = CryptoState();
+    const {symbol, currency, isAuthenticated} = CryptoState();
+
+    const [isAdded, setIsAdded] = useState(false)
 
     const homepage_link = coin.links?.homepage[0]
     const forum_link = coin.links?.official_forum_url[0] 
     const reddit_link = coin.links?.subreddit_url 
 
     const hrChange = coin.market_data?.market_cap_change_percentage_24h.toFixed(2)
+
+    const addToPortfolio = async () =>{
+        console.log('first test')
+    }
 
 
 
@@ -43,12 +52,22 @@ const CoinInfo = ({coin}) => {
             {homepage_link && <a target='_blank' href={homepage_link}><HomeRoundedIcon sx={{color: 'white', fontSize: 60}}></HomeRoundedIcon></a>}
             {forum_link && <a target='_blank' href={forum_link}><ForumRoundedIcon sx={{color: 'white', fontSize: 60}}></ForumRoundedIcon></a>}
             {reddit_link && <a target='_blank' href={reddit_link}><RedditIcon sx={{color: 'white', fontSize: 60}}></RedditIcon></a>}
+            {isAuthenticated && <Tooltip disableFocusListener 
+                disableTouchListener title="Add to a portfolio">
+                <AddRoundedIcon size='large'
+                variant="contained" onClick={() => setIsAdded(true)}
+                sx={{color: 'purple', ":hover": {color: '#b93dfc', cursor: 'pointer'}, fontSize: 60 }} 
+                disableElevation></AddRoundedIcon>
+                </Tooltip>}
 
         </div>
         <div className='coin-info-description'>
             {coin.description?.en && <p>{parse(coin.description?.en)}</p>}
         </div>
-
+        {isAdded && 
+            <AddCoin id={coin.id} coinName={coin.name} setIsAdded={setIsAdded}/>
+        }
+        {/* <AddCoin id={coin.id} setIsAdded={setIsAdded} /> */}
 
     </div>
   )

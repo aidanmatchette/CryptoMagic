@@ -64,3 +64,9 @@
 .negative {
     color: rgb(205, 55, 0)
 }
+.portfolio-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15px;
+}

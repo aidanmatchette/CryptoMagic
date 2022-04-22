@@ -29,7 +29,7 @@ def log_in(request):
         if user.is_active:
             try:
                 login(request, user)
-                return JsonResponse({'user': user.name, 'message': 'You have successfully logged in'}, status=200)
+                return JsonResponse({'user': user.name,'user_id': user.id, 'message': 'You have successfully logged in'}, status=200)
             except Exception as e:
                 print('---- login error -----', e)
                 return JsonResponse({'error message': e }, status=299)
@@ -62,7 +62,6 @@ def who_am_i(request):
 
 
 class PortfolioViewSet(ModelViewSet):
-    print('--------made it--------')
     # queryset = Portfolio.objects.all()
 
     serializer_class = PortfolioSerializer

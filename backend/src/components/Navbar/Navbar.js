@@ -9,14 +9,15 @@ const Navbar = () => {
 
     const navigate = useNavigate()   
 
-    const {currency,setCurrency, isAuthenticated, setIsAuthenticated, setActiveUser} = CryptoState();
+    const {currency,setCurrency, isAuthenticated, setIsAuthenticated} = CryptoState();
 
     const logOut = async () => {
         console.log('-------log out --------')
         try {
             const response = await axios.post('/logout/', null, {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}})
             setIsAuthenticated(false)
-            // setActiveUser('')
+            localStorage.clear()
+            window.location.href = '/#/login'
     
         } catch (e) {
             console.log(e.response.data)

@@ -1,14 +1,24 @@
 import { Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import cryptoMagicAPI from '../api/cryptoAPI';
 import NewPortfolio from '../components/NewPortfolio/NewPortfolio';
+import UserPortfolios from '../components/UserPortfolios/UserPortfolios';
+import { CryptoState } from '../Context';
+
 
 const Portfolio = () => {
 
   const [addPortfolio, setAddPortfolio] = useState(false);
+  
+  const {userPortfolios, setUserPortfolios} = CryptoState();
+  
 
   const handleAddPortfolioClick = () => {
     setAddPortfolio(true)
   }
+
+
+
   return (
     <div>
       <h1></h1>
@@ -19,6 +29,7 @@ const Portfolio = () => {
         disableElevation onClick={handleAddPortfolioClick}>
         Add a Portfolio</Button> 
       }
+      <UserPortfolios  />
     </div>
   )
 }

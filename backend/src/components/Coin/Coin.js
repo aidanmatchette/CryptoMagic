@@ -9,9 +9,12 @@ import { Link } from 'react-router-dom';
 
 const Coin = ({name, price, id, coinAbbr, image, market_cap, percentChange }) => {
 
-    const {symbol} = CryptoState();
-  return (
+    const {symbol, isAuthenticated} = CryptoState();
+    
+    
 
+
+  return (
     <div className='coin'>
         <Link className='coin-link' to={`/coin/${id}`} >
             <div className='coin-banner'>
@@ -27,12 +30,8 @@ const Coin = ({name, price, id, coinAbbr, image, market_cap, percentChange }) =>
                     : <h3 className='percent-change negative'>{percentChange.toFixed(2)}%</h3>
                         }
                     <h3 className='market-cap'>{symbol}{market_cap.toLocaleString()}</h3>
-                    {/* {user.is_activ && <Button size='large' 
-                        variant="contained" href="#/signup" 
-                        sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'} }} 
-                        disableElevation>Add to portfolio</Button>} */}
-
                 </div>
+
             </div>
         </Link>
     </div>
