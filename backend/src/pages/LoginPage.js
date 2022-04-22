@@ -22,6 +22,8 @@ const LoginPage = () =>{
 
 
   const {isAuthenticated, setIsAuthenticated, setActiveUser} = CryptoState();
+
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

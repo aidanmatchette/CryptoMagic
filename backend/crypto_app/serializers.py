@@ -1,18 +1,27 @@
-from dataclasses import fields
+from hashlib import new
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    model = Portfolio
-    fields = ['id', 'portfolio_name', 'owner']
+    class Meta:
+        model = Portfolio
+        fields = ['id', 'portfolio_name', 'owner', 'holdings']
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def create(self, validated_data):
+        try:
+            new_item = super().create(validated_data)
+            return new_item
+        except Exception as e:
+            print('------- error -------', e)
 
-class CryptoCoinSerializer(serializers.ModelSerializer):
-    model = CryptoCoin
-    fields = ['id', 'name', 'name_id', 'quantity', 'coinst']
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+
+class CryptoHoldingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CryptoHoldings 
+        fields = ['id', 'portfolio', 'coin_id']
 
 class AppUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()

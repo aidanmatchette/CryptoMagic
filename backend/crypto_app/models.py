@@ -16,14 +16,18 @@ class Portfolio(models.Model):
     portfolio_name = models.CharField(max_length=65)
     owner = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='portfolios')
 
-class CryptoCoin(models.Model):
-    name = models.CharField(max_length=255)
-    name_id = models.CharField(max_length=255)
-    # coins = models.ManyToManyField(Portfolio, related_name='coins')
-
-# class CryptoHoldings(models.Model):
-#     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
-
     def __str__(self):
-        return self.name
+        return self.portfolio_name
+
+# class CryptoCoin(models.Model):
+#     name_id = models.CharField(max_length=255)
+#     # coins = models.ManyToManyField(Portfolio, related_name='coins')
+#     def __str__(self):
+#         return self.name
+
+class CryptoHoldings(models.Model):
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='holdings')
+    # quantity = models.IntegerField() ADD IF HAVE TIME
+    coin_id = models.CharField(max_length=255)
+
 

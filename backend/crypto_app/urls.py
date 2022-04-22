@@ -13,8 +13,8 @@ from .views import *
 router = DefaultRouter()
 
 router.register('portfolio', PortfolioViewSet, basename='portfolio' )
-router.register('crypto-coin', CryptoCoinViewSet, basename='crypto-coin' )
-router.register('', CryptoCoinViewSet, basename='crypto-coin' )
+router.register('crypto-holdings', CryptoHoldingsViewSet , basename='crypto-holdings' )
+# router.register('', CryptoCoinViewSet, basename='crypto-coin' )
 
 urlpatterns = [
     path('', homepage, name='homepage'),

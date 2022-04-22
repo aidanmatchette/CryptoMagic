@@ -1,13 +1,24 @@
 import { Button } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import NewPortfolio from '../components/NewPortfolio/NewPortfolio';
 
 const Portfolio = () => {
+
+  const [addPortfolio, setAddPortfolio] = useState(false);
+
+  const handleAddPortfolioClick = () => {
+    setAddPortfolio(true)
+  }
   return (
     <div>
       <h1></h1>
-      <Button size='large' variant="contained" href="#/dashboard"
-      sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'} }} disableElevation>
-      Add a Portfolio</Button> 
+      { addPortfolio 
+        ?<NewPortfolio setAddPortfolio={setAddPortfolio}/>
+        : <Button size='large' variant="contained" 
+        sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'} }} 
+        disableElevation onClick={handleAddPortfolioClick}>
+        Add a Portfolio</Button> 
+      }
     </div>
   )
 }

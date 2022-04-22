@@ -32,21 +32,22 @@ const Navbar = () => {
                         <Button onClick={() => navigate('/dashboard')} size='large' 
                         sx={{color: 'black'}}>
                         Dashboard</Button>
-                    { isAuthenticated && 
-                          <Button onClick={() => navigate('/portfolio')} size='large' 
-                          sx={{color: 'black'}}>
-                          My Portfolios</Button>
-                      }
-                        <Button onClick={() => navigate('/login')} size='large' 
-                        sx={{color: 'black'}}>
-                        Log In</Button> 
+                        { isAuthenticated && 
+                            <Button onClick={() => navigate('/portfolio')} size='large' 
+                            sx={{color: 'black'}}>
+                            My Portfolios</Button>
+                        }
+                        {!isAuthenticated && 
+                            <Button onClick={() => navigate('/login')} size='large' 
+                            sx={{color: 'black'}}>Log In</Button> 
+                        }
                     </Box> 
                     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', marginRight: '5px'}}>
                     { isAuthenticated && 
                           <Button onClick={logOut} variant='contained' size='large' 
                           sx={{color: 'white', justifyContent: 'flex-end', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'}}}>
                           Log Out</Button>
-                      }
+                    } 
                     </Box> 
 
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>

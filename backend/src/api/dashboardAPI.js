@@ -14,21 +14,6 @@ const getCSRFToken = () => {
     return csrfToken
 }
 
-// axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken()
-
-const logOut = async () => {
-    console.log('-------log out --------')
-    try {
-        const response = await axios.post('/logout/', null, {headers: {'X-CSRFToken': getCSRFToken()}})
-        // setIsAuthenticated(false)
-        // setActiveUser('')
-
-    } catch (e) {
-        console.log(e.response.data)
-    }
-}
-
-
 
 const tryCatchFetch = async (axiosCall) => {
     try {
@@ -68,6 +53,5 @@ export default {
     getCoin,
     getGraphData,
     getCSRFToken,
-    logOut,
 
 }

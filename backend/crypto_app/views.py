@@ -3,9 +3,10 @@ from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .models import AppUser
 from .serializers import *
-from .views_helper import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -61,15 +62,32 @@ def who_am_i(request):
 
 
 class PortfolioViewSet(ModelViewSet):
-    queryset = Portfolio.objects.all()
+    print('--------made it--------')
+    # queryset = Portfolio.objects.all()
+
     serializer_class = PortfolioSerializer
+    
+    
+    def create(self, request, *args, **kwargs):
+        print('-------------- create')
+        print('request ---------', request)
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        print('-----------get query set')
+        return Portfolio.objects.filter(owner=self.request.user.id)
+
+        
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)     
+
 
     # def get_querey set
     # def create
 
-class CryptoCoinViewSet(ModelViewSet):
-    queryset = CryptoCoin.objects.all()
-    serializer_class = CryptoCoinSerializer
+class CryptoHoldingsViewSet(ModelViewSet):
+    queryset = CryptoHoldings.objects.all()
+    serializer_class = CryptoHoldingsSerializer
 
 
 # class AppUserViewSet(ModelViewSet):
