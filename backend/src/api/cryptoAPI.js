@@ -27,5 +27,7 @@ cryptoMagicAPI.listPortfoliosByUser = async () => {
 cryptoMagicAPI.addCoinToPortfolio = async (addCoinForm) => {
     return await tryCatchFetch(() => axios.post(`/crypto-holdings/`, addCoinForm, {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}}))
 }
-
+cryptoMagicAPI.getPortfolioHoldings = async (portfolioId) => {
+    return await tryCatchFetch(() => axios.get(`/portfolio/${portfolioId}`, null , {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}}))
+}
 export default cryptoMagicAPI

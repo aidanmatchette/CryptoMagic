@@ -3,7 +3,18 @@ from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
 
+
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+
+class CryptoHoldingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CryptoHoldings 
+        fields = ['id', 'portfolio', 'coin_id']
+
+
 class PortfolioSerializer(serializers.ModelSerializer):
+    holdings = CryptoHoldingsSerializer(many=True)
     class Meta:
         model = Portfolio
         fields = ['id', 'portfolio_name', 'owner', 'holdings']
@@ -15,13 +26,6 @@ class PortfolioSerializer(serializers.ModelSerializer):
         except Exception as e:
             print('------- error -------', e)
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
-
-class CryptoHoldingsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CryptoHoldings 
-        fields = ['id', 'portfolio', 'coin_id']
 
 class AppUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()

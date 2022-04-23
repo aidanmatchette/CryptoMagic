@@ -1,21 +1,39 @@
-import React from 'react'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import React, { useState } from 'react'
+import dashboardAPI from '../../api/dashboardAPI';
 import { CryptoState } from '../../Context'
+import SelectedPortfolio from '../SelectedPortfolio/SelectedPortfolio';
+
 
 const UserPortfolios = () => {
     const {userPortfolios} = CryptoState();
+    const [selectedPortfolio, setSelectedPortfolio] = useState('None')
+
 
     
-    console.log(userPortfolios)
+    console.log('----user portfolios----',userPortfolios)
 
-    const eachPortfolio = userPortfolios?.map((portfolio, index) => {
-        console.log(portfolio.portfolio_name)
-        return(
-          <h1 key={`${portfolio.portfolio_name}-${index}`}>{portfolio.portfolio_name}</h1>
-        )
-      })
+    const portfolioDropdown = userPortfolios?.map((portfolio, index) => {
+      return <MenuItem key={`${portfolio.portfolio_name}-${index}`} value={portfolio.id} >{portfolio.portfolio_name}</MenuItem>
+      // <MenuItem key={`${portfolio.portfolio_name}-${index}`} value={portfolio.id} >{portfolio.portfolio_name}</MenuItem>
+    })
+
+ 
     return (
         <div>
-            {eachPortfolio}
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="select-standard-label">Select Portfolio</InputLabel>
+            <Select
+            labelId="select-standard-label"
+            id="select-standard"
+            value={selectedPortfolio}
+            onChange={(event) => setSelectedPortfolio(event.target.value)}
+            label="Portfolios"
+            >
+              {portfolioDropdown}
+            </Select>
+          </FormControl>
+          <SelectedPortfolio selectedPortfolio={selectedPortfolio} />
         </div>
     )
 }

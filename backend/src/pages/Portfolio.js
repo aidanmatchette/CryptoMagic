@@ -12,6 +12,12 @@ const Portfolio = () => {
   
   const {userPortfolios, setUserPortfolios} = CryptoState();
   
+  const getPortfolioHoldings = async () => {
+    const data = await cryptoMagicAPI.getPortfolioHoldings(1)
+    if(data) {
+      console.log(data);
+    }
+  }
 
   const handleAddPortfolioClick = () => {
     setAddPortfolio(true)
