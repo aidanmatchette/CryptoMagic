@@ -3,9 +3,11 @@
     justify-content: center;
 }
 .delete-btn {
-    display: inline-block;
+    display: flex;
     align-content: center;
     align-items: center;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 .search-portfolio {

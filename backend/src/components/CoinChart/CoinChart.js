@@ -60,7 +60,7 @@ const CoinChart = ({ coin }) => {
             <Button className='num-buttons' onClick={handleNumOfDays} variant='contained' sx={{borderRadius: 10}} value={30} >Month</Button>
             <Button className='num-buttons' onClick={handleNumOfDays} variant='contained' sx={{borderRadius: 10}} value={1} >Day</Button>
         </div>
-        <div className='graph-container'>
+        {/* <div className='graph-container'> */}
             <div className='coin-graph'>
             { graphData 
                     ? <Line data={{ 
@@ -102,7 +102,8 @@ const CoinChart = ({ coin }) => {
                     : <LoadingDashboard />
             }
             </div>
-        </div>
+            <div className='blank-space'></div>
+        {/* </div> */}
     </div>
     </ThemeProvider>
   )

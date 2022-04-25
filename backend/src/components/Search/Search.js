@@ -2,11 +2,11 @@ import { TextField } from '@mui/material'
 import React from 'react'
 import './search.css'
 
-const Search = ({setSearch, setSearchPortfolio}) => {
+const Search = ({setSearch}) => {
 
     const handleChange = (event) => {
         setSearch(event.target.value)
-        setSearchPortfolio(event.target.value)
+
       }
 
     return (

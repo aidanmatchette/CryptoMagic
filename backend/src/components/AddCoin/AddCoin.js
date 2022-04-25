@@ -16,7 +16,6 @@ const AddCoin = ({setIsAdded, coinName, id}) => {
     const handleChange = (event) => {
         setPortfolioToAdd(event.target.value)
     }
-    console.log('----- new coin -----', portfolioToAdd)
     const handleSubmit = async (event) => {
         event.preventDefault()
         setOpen(false)
@@ -47,7 +46,6 @@ const AddCoin = ({setIsAdded, coinName, id}) => {
                         <InputLabel htmlFor="demo-dialog-native">Portfolios</InputLabel>
                         <Select
                         native
-                        // value={null}
                         onChange={handleChange}
                         input={<OutlinedInput label="Portfolio" id="portfolio-dialog-native" sx={{width: 200, alignItems: 'center'}}/>}
                         >

@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CryptoState } from '../Context';
 import axios from 'axios';
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar, SnackbarContent } from '@mui/material';
 
 
 
@@ -24,6 +24,7 @@ import { Alert, Snackbar } from '@mui/material';
 
 const SignupPage = () =>{
 
+  const [open, setOpen] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,9 +42,7 @@ const SignupPage = () =>{
 
         window.location.reload()
       } else {
-        //TODO: add MUI alert for successful and unsuccessful responses
-        console.log('error')
-        alert("error")
+        setOpen(true)
       }
     })
   };
@@ -100,6 +99,11 @@ const SignupPage = () =>{
           </Box>
         </Grid>
       </Grid>
+      <SnackbarContent open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+          <Alert onClose={() => setOpen(false)} severity="error" sx={{ width: '100%' }}>
+            There was an error during signup!
+          </Alert>
+      </SnackbarContent>
     </div>
   );
 }

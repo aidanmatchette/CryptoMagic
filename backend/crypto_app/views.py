@@ -41,8 +41,9 @@ def log_in(request):
 
 @csrf_exempt
 def sign_up(request):
+    data = json.loads(request.body)
     try:
-        AppUser.objects.create_user(username=request.data['email'], password=request.data['password'], name=request.data['name'] ,email=request.data['email'])
+        AppUser.objects.create_user(username=data['email'], password=data['password'], name=data['name'] ,email=data['email'])
         return JsonResponse({'message': 'Your account has successfully been created'}, status=200)
 
     except Exception as e:

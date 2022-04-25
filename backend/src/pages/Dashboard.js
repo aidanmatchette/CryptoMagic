@@ -15,14 +15,15 @@ import LoadingDashboard from '../components/LoadingDashboard'
 const Dashboard = () => {
   const [allCoins, setAllCoins] = useState([])
   const [trendingCoins, setTrendingCoins] = useState([])
-  const [search, setSearch] = useState('')
+  // const [search, setSearch] = useState('')
   const [pageNum, setPageNum] = useState(1)
   
-  const {currency} = CryptoState();
+  const {currency, search, setSearch} = CryptoState();
   
   useEffect(() => {
     generateAllCoins()
     generateTrendingCoins()
+    setSearch('')
       
   },[]);
 

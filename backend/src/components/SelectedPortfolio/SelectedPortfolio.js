@@ -10,23 +10,25 @@ import Search from '../Search/Search';
 
 const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
 
-    const {currency} = CryptoState();
+    const {currency, search, setSearch} = CryptoState();
 
     const [holdings, setHoldings] = useState([]);
     const [portfolioCoins, setPortfolioCoins] = useState([])
-    const [searchPortfolio, setSearchPortfolio] = useState('')
     const [pageNum, setPageNum] = useState(1)
+
+
+    useEffect(() => {
+        setSearch('')
+    },[])
 
     useEffect(() => {
         setPortfolioCoins([])
         if(selectedPortfolio != 'None') {
-            getPortfolioHoldings(selectedPortfolio)
-            
+            getPortfolioHoldings(selectedPortfolio)  
         }
     }, [selectedPortfolio])
 
     useEffect(() => {
-
         if(holdings.length > 0) {
             getPortfolioCoins()
         }
@@ -58,12 +60,7 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
             }
         }
     }
-    //TODO be able to search with in your portfolio
-    // const searchCoins = portfolioCoins.filter(coin => {
-    //     return coin.name.toLowerCase().includes(search.toLowerCase())
-    // })
-    //.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10)
-    console.log('portfolio coins----> ', portfolioCoins);
+
 
     const handleDelete = async (holdingsIndex) => {
         const data = await cryptoMagicAPI.deleteHoldingById(holdings[holdingsIndex].id)
@@ -74,7 +71,7 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
         }
     }
     const searchCoins = portfolioCoins.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10).filter(coin => {
-        return coin.name.toLowerCase().includes(searchPortfolio.toLowerCase())
+        return coin.name.toLowerCase().includes(search.toLowerCase())
       })
 
     const filteredCoins = searchCoins?.map((coin,index) => {
@@ -101,7 +98,7 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
     return (
         <div>
             <div className='search-portfolio' >
-                {selectedPortfolio != 'None' && <Search setSearchPortfolio={setSearchPortfolio} variant='primary' />}
+                {selectedPortfolio != 'None' && <Search setSearch={setSearch} variant='primary' />}
             </div>
             <div className='portfolio-coins'>
                 {filteredCoins}
