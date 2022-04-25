@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { CryptoState } from '../Context';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { Alert, Snackbar } from '@mui/material';
 
 
 
@@ -19,7 +20,7 @@ const LoginPage = () =>{
 
 
   const {isAuthenticated, setIsAuthenticated } = CryptoState();
-
+  const [open, setOpen] = useState(false)
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,13 +38,10 @@ const LoginPage = () =>{
         setIsAuthenticated(true)
         localStorage.setItem('user_id', response.data.user_id)
         localStorage.setItem('user', response.data.user)
-
-        //TODO : set active user upon login and logout.
         window.location.href = '/#/dashboard'
-        // window.location.reload()
+
       } else {
-        // TODO : make this a MUI alert and an alert for successfull login
-        alert("there was an error try again")
+        setOpen(true)
       }
     })
   };
@@ -118,6 +116,11 @@ const LoginPage = () =>{
           </Box>
         </Grid>
       </Grid>
+      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+          <Alert onClose={() => setOpen(false)} severity="error" sx={{ width: '100%' }}>
+            There was an error during login!
+          </Alert>
+      </Snackbar>
     </div>
   );
 }

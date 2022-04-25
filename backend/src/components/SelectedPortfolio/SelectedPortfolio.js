@@ -4,8 +4,9 @@ import dashboardAPI from '../../api/dashboardAPI';
 import { CryptoState } from '../../Context';
 import Coin from '../Coin/Coin';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-import { Tooltip } from '@mui/material';
+import { Pagination, Tooltip } from '@mui/material';
 import './selectedportfolio.css'
+import Search from '../Search/Search';
 
 const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
 
@@ -13,6 +14,8 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
 
     const [holdings, setHoldings] = useState([]);
     const [portfolioCoins, setPortfolioCoins] = useState([])
+    const [searchPortfolio, setSearchPortfolio] = useState('')
+    const [pageNum, setPageNum] = useState(1)
 
     useEffect(() => {
         setPortfolioCoins([])
@@ -37,6 +40,16 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
     }
     console.log('holdings',holdings)
 
+
+    const handlePageChange = (event, value) => {
+        setPageNum(value)
+        window.scrollTo({
+          top: 400,
+          left: 400,
+          behavior: 'smooth'
+        })
+      } 
+
     const getPortfolioCoins = async () => {
         for (let coin of holdings) {
             const data = await dashboardAPI.getCoin(coin.coin_id)
@@ -60,8 +73,11 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
             getPortfolioHoldings(selectedPortfolio)            
         }
     }
+    const searchCoins = portfolioCoins.slice((pageNum - 1) * 10, (pageNum - 1) * 10 + 10).filter(coin => {
+        return coin.name.toLowerCase().includes(searchPortfolio.toLowerCase())
+      })
 
-    const filteredCoins = portfolioCoins?.map((coin,index) => {
+    const filteredCoins = searchCoins?.map((coin,index) => {
         return (
             <div className='selected-portfolio'>
                 <div className='portfolio-banner'>
@@ -84,8 +100,15 @@ const SelectedPortfolio = ({selectedPortfolio, setSelectedPortfolio}) => {
       })
     return (
         <div>
+            <div className='search-portfolio' >
+                {selectedPortfolio != 'None' && <Search setSearchPortfolio={setSearchPortfolio} variant='primary' />}
+            </div>
             <div className='portfolio-coins'>
                 {filteredCoins}
+                <Pagination sx={{display: 'flex', justifyContent: 'center', width: "100%", height: 60}} 
+                size='large' 
+                count={(portfolioCoins.length/10).toFixed(0)}
+                onChange={handlePageChange}/>
             </div>
         </div>
     )
