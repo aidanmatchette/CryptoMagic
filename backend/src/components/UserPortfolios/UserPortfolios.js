@@ -1,13 +1,13 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Alert, AlertTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react'
 import dashboardAPI from '../../api/dashboardAPI';
 import { CryptoState } from '../../Context'
 import SelectedPortfolio from '../SelectedPortfolio/SelectedPortfolio';
 
 
-const UserPortfolios = () => {
+const UserPortfolios = ({selectedPortfolio, setSelectedPortfolio}) => {
     const {userPortfolios} = CryptoState();
-    const [selectedPortfolio, setSelectedPortfolio] = useState('None')
+    // const [selectedPortfolio, setSelectedPortfolio] = useState('None')
 
 
     
@@ -21,9 +21,10 @@ const UserPortfolios = () => {
  
     return (
         <div>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 200, width: 500 }}>
             <InputLabel id="select-standard-label">Select Portfolio</InputLabel>
             <Select
+            // sx={{width: 100}}
             labelId="select-standard-label"
             id="select-standard"
             value={selectedPortfolio}
@@ -33,7 +34,12 @@ const UserPortfolios = () => {
               {portfolioDropdown}
             </Select>
           </FormControl>
-          <SelectedPortfolio selectedPortfolio={selectedPortfolio} />
+          <SelectedPortfolio selectedPortfolio={selectedPortfolio} setSelectedPortfolio={setSelectedPortfolio} />
+          {selectedPortfolio === 'None' &&       
+            <Alert sx={{maxWidth: 1500, display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', margin:'auto'}} severity="info">
+              <AlertTitle>Welcome {localStorage.getItem('user')}</AlertTitle>
+              Please select a portfolio you would like to view. <strong>check out your coins!</strong>
+            </Alert>}
         </div>
     )
 }

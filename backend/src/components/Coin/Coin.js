@@ -34,6 +34,13 @@ const Coin = ({name, price, id, coinAbbr, image, market_cap, percentChange }) =>
 
             </div>
         </Link>
+        {/* {withinPortfolio <Tooltip disableFocusListener 
+        disableTouchListener title="Delete from portfolio">
+        <DeleteForeverRoundedIcon size='large'
+        variant="contained" onClick={() => handleDelete()}
+        sx={{color: 'purple', ":hover": {color: '#b93dfc', cursor: 'pointer'}, fontSize: 60 }} 
+        disableElevation></DeleteForeverRoundedIcon>
+        </Tooltip> */}
     </div>
   )
 }

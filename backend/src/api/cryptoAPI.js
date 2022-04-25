@@ -30,4 +30,10 @@ cryptoMagicAPI.addCoinToPortfolio = async (addCoinForm) => {
 cryptoMagicAPI.getPortfolioHoldings = async (portfolioId) => {
     return await tryCatchFetch(() => axios.get(`/portfolio/${portfolioId}`, null , {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}}))
 }
+cryptoMagicAPI.deleteHoldingById= async (holdingId) => {
+    return await tryCatchFetch(() => axios.delete(`/crypto-holdings/${holdingId}`, {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}}))
+}
+cryptoMagicAPI.deletePortfolioById= async (portfolioId) => {
+    return await tryCatchFetch(() => axios.delete(`/portfolio/${portfolioId}`, {headers: {'X-CSRFToken': dashboardAPI.getCSRFToken()}}))
+}
 export default cryptoMagicAPI

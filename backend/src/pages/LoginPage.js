@@ -36,6 +36,7 @@ const LoginPage = () =>{
       if(response.data.message) {
         setIsAuthenticated(true)
         localStorage.setItem('user_id', response.data.user_id)
+        localStorage.setItem('user', response.data.user)
 
         //TODO : set active user upon login and logout.
         window.location.href = '/#/dashboard'

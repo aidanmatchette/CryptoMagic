@@ -42,24 +42,24 @@ const AddCoin = ({setIsAdded, coinName, id}) => {
       <DialogTitle>Select which portfolio to add {coinName} too</DialogTitle>
         <form onSubmit={handleSubmit}>
             <DialogContent>
-                    <Box component="form" name='newCoin' onSubmit={handleSubmit} sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <Box component="form" name='newCoin' onSubmit={handleSubmit} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel htmlFor="demo-dialog-native">Portfolios</InputLabel>
                         <Select
                         native
-                        value={null}
+                        // value={null}
                         onChange={handleChange}
                         input={<OutlinedInput label="Portfolio" id="portfolio-dialog-native" sx={{width: 200, alignItems: 'center'}}/>}
                         >
-                            <option value=''>None</option>
+                            <option value='None'>None</option>
                             {portfolioOptions}
                         </Select>
                     </FormControl>
                     </Box>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button type='submit' for='newCoin' >Ok</Button>
+                <Button onClick={handleClose} sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'}}}>Cancel</Button>
+                <Button type='submit' for='newCoin'sx={{color: 'white', background: 'purple', borderRadius: "10px", ":hover": {background: '#46016b'}}} >Ok</Button>
             </DialogActions>
         </form>
 

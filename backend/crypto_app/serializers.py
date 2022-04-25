@@ -14,7 +14,7 @@ class CryptoHoldingsSerializer(serializers.ModelSerializer):
 
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    holdings = CryptoHoldingsSerializer(many=True)
+    holdings = CryptoHoldingsSerializer(many=True, read_only=True)
     class Meta:
         model = Portfolio
         fields = ['id', 'portfolio_name', 'owner', 'holdings']
