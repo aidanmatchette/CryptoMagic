@@ -18,7 +18,6 @@ const Carousell = ({trendingCoins}) => {
     const {symbol} = CryptoState();
     const styles = {
         imageContainer: {
-            // backgroundImage: 'url(https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80)',
             height:450,
             width: 2000,
             display: 'flex',
@@ -37,7 +36,7 @@ const Carousell = ({trendingCoins}) => {
                     ? <span className='percent positive'>{percentChange}%</span> 
                     : <span className='percent negative'>{percentChange}%</span>} 
                 </span> 
-                <h3 className='price'>{symbol}{coin.current_price}</h3>
+                <h3 className='price'>{symbol}{coin.current_price.toLocaleString()}</h3>
             </Link>
         )
     })

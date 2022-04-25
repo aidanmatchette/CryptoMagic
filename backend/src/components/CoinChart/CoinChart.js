@@ -31,18 +31,18 @@ const CoinChart = ({ coin }) => {
         setNumDays(event.target.value)
 
     }
-    const data={ 
-        labels: graphData?.map((dataPoint) => {
-            let date = new Date(dataPoint[0])
-            let time = date.getHours() > 12 
-                ? `${date.getHours() - 12}:${date.getMinutes()} pm`
-                : `${date.getHours()}:${date.getMinutes()} am`
-            return numDays !== 1 ? date.toLocaleDateString() : time
-        }),
-        datasets: [
-            {data: graphData?.map((dataPoint) => dataPoint[1])}
-        ]
-    } 
+    // const data={ 
+    //     labels: graphData?.map((dataPoint) => {
+    //         let date = new Date(dataPoint[0])
+    //         let time = date.getHours() > 12 
+    //             ? `${date.getHours() - 12}:${date.getMinutes()} pm`
+    //             : `${date.getHours()}:${date.getMinutes()} am`
+    //         return numDays !== 1 ? date.toLocaleDateString() : time
+    //     }),
+    //     datasets: [
+    //         {data: graphData?.map((dataPoint) => dataPoint[1])}
+    //     ]
+    // } 
     const darkTheme = createTheme({
         palette: {
           mode: 'dark',
@@ -63,13 +63,13 @@ const CoinChart = ({ coin }) => {
         {/* <div className='graph-container'> */}
             <div className='coin-graph'>
             { graphData 
-                    ? <Line data={{ 
+                    ? ( <Line data={{ 
                         labels: graphData.map((dataPoint) => {
                             let date = new Date(dataPoint[0])
                             let time = date.getHours() > 12 
                                 ? `${date.getHours() - 12}:${date.getMinutes()} pm`
                                 : `${date.getHours()}:${date.getMinutes()} am`
-                            return numDays === 1 ? time : date.toLocaleDateString() 
+                            return numDays == 1 ? time : date.toLocaleDateString() 
                         }),
                         datasets: [
                             {
@@ -99,7 +99,7 @@ const CoinChart = ({ coin }) => {
                     }}
 
                     /> 
-                    : <LoadingDashboard />
+                    ) : <LoadingDashboard />
             }
             </div>
             <div className='blank-space'></div>

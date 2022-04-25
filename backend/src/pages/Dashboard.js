@@ -29,6 +29,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     generateAllCoins()
+    generateTrendingCoins()
   },[currency])
 
   const generateTrendingCoins = async () => {

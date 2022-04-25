@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -69,6 +69,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'crypto_proj.urls'
 
 # CSRF_TRUSTED_ORIGINS=['http//localhost:8000']
+CSRF_TRUSTED_ORIGINS = ['https://cryptomagic.aidanmatchette.com']
 
 TEMPLATES = [
     {
